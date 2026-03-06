@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Incident Response Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, rgb(252, 68, 240), #7ff3f9, rgb(116, 195, 221));
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.5);
+    text-align: center;
+    width: 600px;
+    color: black;
+}
+
+textarea {
+    width: 90%;
+    height: 150px;
+    padding: 12px;
+    margin: 15px 0;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background: #28a745;
+    color: white;
+}
+
+.export-btn {
+    background: #007BFF;
+    color: white;
+}
+
+pre {
+    background: rgba(255,255,255,0.3);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="main-content">
+<div class="dashboard-container">
+
+<h2>Incident Response Assistant</h2>
+
+<!-- FIXED FORM -->
+<form method="POST" action="{{ url_for('dashboard') }}">
+<textarea name="scenario" placeholder="Describe your incident scenario..." required></textarea>
+<br>
+<button type="submit" class="submit-btn">Submit</button>
+</form>
+
+<h3>Incident Response Plan:</h3>
+
+<pre>{{ response if response else "No response yet." }}</pre>
+
+<form method="POST" action="/export/txt">
+<input type="hidden" name="response" value="{{ response }}">
+<button type="submit" class="export-btn">Export as TXT</button>
+</form>
+
+<form method="POST" action="/export/pdf">
+<input type="hidden" name="response" value="{{ response }}">
+<button type="submit" class="export-btn">Export as PDF</button>
+</form>
+
+</div>
+</div>
+
+<div class="footer">
+Designed and Developed by Riddhi (CS23088)
+</div>
+
+</body>
+</html>
