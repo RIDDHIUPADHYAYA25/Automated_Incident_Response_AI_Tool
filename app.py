@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, Response, 
 import google.generativeai as genai
 from fpdf import FPDF
 import logging
+import os
 
 app = Flask(__name__)
 app.secret_key = "incident_response_tool_secret_2026"
@@ -11,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Configure Gemini API
 try:
-    genai.configure(api_key="YOUR_API_KEY_HERE")
+    genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
     model = genai.GenerativeModel("gemini-2.5-flash")
 except Exception as e:
     logging.error("Gemini configuration failed: %s", e)
