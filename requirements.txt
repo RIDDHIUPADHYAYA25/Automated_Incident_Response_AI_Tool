@@ -1,4 +1,4 @@
-Flask
-google-generativeai
-fpdf
+flask
 gunicorn
+fpdf
+google-generativeai
