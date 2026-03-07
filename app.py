@@ -5,7 +5,7 @@ import logging
 import os
 
 app = Flask(__name__)
-app.secret_key = "incident_response_tool_secret_2026"
+app.secret_key = os.environ.get("SECRET_KEY", "fallback_secret")
 
 # Logging for debugging
 logging.basicConfig(level=logging.INFO)
